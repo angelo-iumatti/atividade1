@@ -95,6 +95,25 @@ public class ProdutosDAO {
         }
         return produtos;
     }
+
+    public ResultSet encontrarId(ProdutosDTO stat) {
+        String sql = "SELECT id FROM produtos WHERE status = \"?\"";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String ct = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stat.setId(rs.getInt("id"));
+            stmt.executeUpdate();
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            conectaDAO.closeConnection(conn, stmt);
+        }
+        return null;
+    }
         
 }
 
