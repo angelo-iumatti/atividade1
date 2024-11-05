@@ -50,6 +50,51 @@ public class ProdutosDAO {
             conectaDAO.closeConnection(conn, stmt);
         }
     }  
+
+    public void venderProduto(ProdutosDTO produto) {
+
+        String sql = "INSERT INTO produto (status) VALUE (?)";
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, produto.getStatus());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            conectaDAO.closeConnection(conn, stmt);
+        }
+    }  
+
+    //Fazer a consulta entre as duas tabelas usando composição
+    public List<ProdutosDTO> listarProdutosVendidos() {
+        String sql = "SELECT * FROM lista_estoque;";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<ProdutosDTO> produtos = new ArrayList<>();
+
+        try {
+            //adicionando os dados no banco na Lista
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                //setar os dois objetos de consulta nome e status
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setNome(rs.getString("pdesc"));
+                produto.setStatus(false);
+
+                produtos.add(produto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            conectaDAO.closeConnection(conn, stmt, rs);
+        }
+        return produtos;
+    }
         
 }
 

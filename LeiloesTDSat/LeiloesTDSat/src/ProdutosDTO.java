@@ -11,13 +11,13 @@ public class ProdutosDTO {
     private Integer id;
     private String nome;
     private Integer valor;
-    private String status;
+    private boolean status;
 
     //Construtor
     public ProdutosDTO() {
     }
 
-    public ProdutosDTO(Integer id, String nome, Integer valor, String status) {
+    public ProdutosDTO(Integer id, String nome, Integer valor, boolean status) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
@@ -38,9 +38,6 @@ public class ProdutosDTO {
         return valor;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -54,8 +51,13 @@ public class ProdutosDTO {
         this.valor = valor;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getStatus() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStatus'");
     }
     
 }
